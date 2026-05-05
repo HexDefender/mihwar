@@ -1,42 +1,39 @@
 "use client";
 
-import { useState, useTransition } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useActionState, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion } from "motion/react";
-import { signInAction } from "@/actions/auth";
+import { signInAction, type SignInState } from "@/actions/auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ArrowRight, Eye, EyeSlash, Warning } from "@phosphor-icons/react";
 import { t } from "@/lib/i18n";
 
+const ERROR_MESSAGES: Record<string, string> = {
+  INVALID_CREDENTIALS: t.login.error,
+  INVALID_INPUT: "أكمل الحقول قبل المتابعة.",
+  CallbackRouteError: t.login.error,
+};
+
 export function LoginForm() {
-  const router = useRouter();
   const params = useSearchParams();
   const from = params.get("from") || "/dashboard";
 
-  const [identifier, setIdentifier] = useState("");
-  const [password, setPassword] = useState("");
+  const [state, action, pending] = useActionState<SignInState, FormData>(
+    signInAction,
+    null
+  );
   const [showPwd, setShowPwd] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [pending, start] = useTransition();
 
-  function onSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setError(null);
-    start(async () => {
-      const res = await signInAction({ identifier, password, redirectTo: from });
-      if (res?.error) {
-        setError(t.login.error);
-      } else {
-        router.replace(from);
-        router.refresh();
-      }
-    });
-  }
+  const errorMessage = state?.error
+    ? ERROR_MESSAGES[state.error] ?? t.login.error
+    : null;
 
   return (
-    <form onSubmit={onSubmit} className="flex flex-col gap-5">
+    <form action={action} className="flex flex-col gap-5">
+      <input type="hidden" name="redirectTo" value={from} />
+
       <div>
         <Label htmlFor="identifier">{t.login.identifier}</Label>
         <Input
@@ -44,8 +41,6 @@ export function LoginForm() {
           name="identifier"
           autoComplete="username"
           required
-          value={identifier}
-          onChange={(e) => setIdentifier(e.target.value)}
           placeholder="admin@mihwar.local"
         />
       </div>
@@ -59,8 +54,6 @@ export function LoginForm() {
             type={showPwd ? "text" : "password"}
             autoComplete="current-password"
             required
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
             placeholder="••••••••"
             className="pe-12"
           />
@@ -75,14 +68,14 @@ export function LoginForm() {
         </div>
       </div>
 
-      {error && (
+      {errorMessage && (
         <motion.div
           initial={{ y: -6, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           className="flex items-center gap-2 rounded-2xl border border-[color-mix(in_oklab,var(--danger)_30%,transparent)] bg-[color-mix(in_oklab,var(--danger)_8%,transparent)] px-4 py-3 text-sm text-[var(--danger)]"
         >
           <Warning size={16} weight="duotone" />
-          {error}
+          {errorMessage}
         </motion.div>
       )}
 

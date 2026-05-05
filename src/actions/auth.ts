@@ -1,23 +1,34 @@
 "use server";
 
-import { signIn, signOut } from "@/lib/auth";
 import { AuthError } from "next-auth";
+import { signIn, signOut } from "@/lib/auth";
 
-export async function signInAction(data: {
-  identifier: string;
-  password: string;
-  redirectTo?: string;
-}): Promise<{ error?: string } | undefined> {
+export type SignInState = { error?: string } | null;
+
+export async function signInAction(
+  _prev: SignInState,
+  formData: FormData
+): Promise<SignInState> {
+  const identifier = String(formData.get("identifier") ?? "").trim();
+  const password = String(formData.get("password") ?? "");
+  const redirectTo = String(formData.get("redirectTo") ?? "/dashboard");
+
+  if (!identifier || !password) {
+    return { error: "INVALID_INPUT" };
+  }
+
   try {
     await signIn("credentials", {
-      identifier: data.identifier,
-      password: data.password,
-      redirect: false,
+      identifier,
+      password,
+      redirectTo,
     });
-    return undefined;
+    return null;
   } catch (err) {
     if (err instanceof AuthError) {
-      return { error: err.type };
+      const code =
+        err.type === "CredentialsSignin" ? "INVALID_CREDENTIALS" : err.type;
+      return { error: code };
     }
     throw err;
   }

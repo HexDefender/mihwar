@@ -9,9 +9,9 @@ import { arabicNumber } from "@/lib/utils";
 
 export function Hero() {
   return (
-    <section className="relative isolate min-h-[100dvh] overflow-hidden pt-32 pb-12 md:pt-36 md:pb-20">
-      <div className="absolute inset-0 grid-floor opacity-[0.45] -z-10" aria-hidden="true" />
-      <div className="absolute inset-0 -z-10 [background:radial-gradient(50%_60%_at_50%_0%,color-mix(in_oklab,var(--accent)_18%,transparent),transparent_75%)]" aria-hidden="true" />
+    <section className="relative isolate min-h-[100dvh] overflow-hidden pt-28 sm:pt-32 pb-16 md:pt-36 md:pb-20">
+      <div className="absolute inset-0 grid-floor opacity-[0.35] sm:opacity-[0.45] -z-10" aria-hidden="true" />
+      <div className="absolute inset-0 -z-10 [background:radial-gradient(70%_60%_at_50%_0%,color-mix(in_oklab,var(--accent)_18%,transparent),transparent_75%)]" aria-hidden="true" />
 
       <div className="relative mx-auto max-w-7xl px-5 md:px-8">
         <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
@@ -30,7 +30,7 @@ export function Hero() {
               initial={{ y: 24, opacity: 0, filter: "blur(6px)" }}
               animate={{ y: 0, opacity: 1, filter: "blur(0)" }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-              className="mt-6 text-balance text-4xl md:text-6xl lg:text-[64px] leading-[1.05] tracking-tight font-semibold"
+              className="mt-6 text-balance text-[34px] sm:text-5xl md:text-6xl lg:text-[64px] leading-[1.07] sm:leading-[1.05] tracking-tight font-semibold"
             >
               {t.hero.title.split("،").map((part, i, arr) => (
                 <span key={i} className={i === 1 ? "gradient-text" : ""}>
@@ -72,14 +72,14 @@ export function Hero() {
               initial={{ y: 16, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.7 }}
-              className="mt-12 grid grid-cols-3 gap-6 max-w-md"
+              className="mt-10 sm:mt-12 grid grid-cols-3 gap-3 sm:gap-6 max-w-md"
             >
               {[t.hero.metric1, t.hero.metric2, t.hero.metric3].map((m, i) => (
-                <div key={i} className="border-s border-line ps-4 first:border-s-0 first:ps-0">
-                  <div className="text-2xl md:text-3xl font-semibold tracking-tight font-mono tabular-nums">
+                <div key={i} className="border-s border-line ps-3 sm:ps-4 first:border-s-0 first:ps-0">
+                  <div className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight font-mono tabular-nums">
                     {arabicNumber(m.v.replace(/[٠-٩]/g, (d) => String(d.charCodeAt(0) - 0x0660)))}
                   </div>
-                  <div className="text-[11px] uppercase tracking-[0.18em] text-fg-mute mt-1">{m.l}</div>
+                  <div className="text-[10px] sm:text-[11px] uppercase tracking-[0.16em] sm:tracking-[0.18em] text-fg-mute mt-1 leading-snug">{m.l}</div>
                 </div>
               ))}
             </motion.div>

@@ -103,7 +103,7 @@ export function TransferRow({ transfer, perspective, currentUserId, isAdmin }: T
           </div>
 
           {transfer.message && (
-            <div className="mt-3 rounded-2xl bg-fg/4 px-4 py-3 text-[14px] text-fg-soft leading-relaxed">"{transfer.message}"</div>
+            <div className="mt-3 rounded-2xl bg-fg/4 px-4 py-3 text-[14px] text-fg-soft leading-relaxed break-words">«{transfer.message}»</div>
           )}
 
           {(canConfirm || canCancel) && (

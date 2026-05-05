@@ -22,16 +22,16 @@ export function StatCard({
   }[tone];
 
   return (
-    <div className="rounded-3xl border border-line bg-bg-elev/70 backdrop-blur-md p-6 flex flex-col gap-3 shadow-[var(--shadow-bezel)]">
-      <div className="flex items-center justify-between">
-        <span className="text-[12px] uppercase tracking-[0.2em] text-fg-mute font-mono">{label}</span>
+    <div className="rounded-3xl border border-line bg-bg-elev/70 backdrop-blur-md p-4 sm:p-6 flex flex-col gap-2 sm:gap-3 shadow-[var(--shadow-bezel)]">
+      <div className="flex items-center justify-between gap-2">
+        <span className="text-[10px] sm:text-[12px] uppercase tracking-[0.16em] sm:tracking-[0.2em] text-fg-mute font-mono leading-tight">{label}</span>
         {IconCmp && (
-          <span className={`inline-flex h-9 w-9 items-center justify-center rounded-2xl ${toneClass}`}>
-            <IconCmp size={18} weight="duotone" />
+          <span className={`inline-flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-2xl shrink-0 ${toneClass}`}>
+            <IconCmp size={16} weight="duotone" />
           </span>
         )}
       </div>
-      <div className="text-3xl font-mono font-semibold tabular-nums tracking-tight">
+      <div className="text-2xl sm:text-3xl font-mono font-semibold tabular-nums tracking-tight">
         {typeof value === "number" ? arabicNumber(value) : value}
       </div>
       {trend && <div className="text-[12px] text-fg-mute">{trend}</div>}

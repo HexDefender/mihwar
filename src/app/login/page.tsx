@@ -21,10 +21,10 @@ export default function LoginPage() {
         <ThemeToggle />
       </header>
 
-      <main className="relative flex-1 flex items-center justify-center px-5 py-10">
+      <main className="relative flex-1 flex items-center justify-center px-4 sm:px-5 py-8 sm:py-10">
         <div className="w-full max-w-md">
           <div className="bezel">
-            <div className="bezel-inner relative overflow-hidden p-8 md:p-10">
+            <div className="bezel-inner relative overflow-hidden p-6 sm:p-8 md:p-10">
               <div
                 className="absolute -top-16 -right-16 h-44 w-44 rounded-full opacity-25 blur-3xl pointer-events-none"
                 style={{ background: "var(--accent)" }}
@@ -35,10 +35,10 @@ export default function LoginPage() {
                   <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
                   {t.login.eyebrow}
                 </span>
-                <h1 className="mt-5 text-3xl md:text-[34px] font-semibold tracking-tight leading-tight">
+                <h1 className="mt-5 text-2xl sm:text-3xl md:text-[34px] font-semibold tracking-tight leading-tight">
                   {t.login.title}
                 </h1>
-                <p className="mt-3 text-fg-soft text-[15px] leading-relaxed">{t.login.body}</p>
+                <p className="mt-3 text-fg-soft text-[14px] sm:text-[15px] leading-relaxed">{t.login.body}</p>
 
                 <div className="mt-8">
                   <Suspense fallback={<div className="h-64 rounded-2xl bg-fg/4 animate-pulse" />}>

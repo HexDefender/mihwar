@@ -59,6 +59,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body className="min-h-[100dvh] bg-bg text-fg selection:bg-accent selection:text-accent-fg">
         <ThemeProvider>
+          <div className="aurora" aria-hidden="true" />
+          <div className="vignette" aria-hidden="true" />
           {children}
           <div className="noise-overlay" aria-hidden="true" />
         </ThemeProvider>

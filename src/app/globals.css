@@ -103,9 +103,53 @@ html[dir="rtl"] {
 body {
   min-height: 100dvh;
   background-image:
-    radial-gradient(at 12% 8%, color-mix(in oklab, var(--accent) 9%, transparent) 0px, transparent 45%),
-    radial-gradient(at 88% 12%, color-mix(in oklab, var(--fg) 5%, transparent) 0px, transparent 50%),
-    radial-gradient(at 50% 100%, color-mix(in oklab, var(--accent) 5%, transparent) 0px, transparent 60%);
+    radial-gradient(at 8% 6%, color-mix(in oklab, var(--accent) 14%, transparent) 0px, transparent 42%),
+    radial-gradient(at 92% 8%, color-mix(in oklab, #5a8cff 8%, transparent) 0px, transparent 48%),
+    radial-gradient(at 78% 60%, color-mix(in oklab, var(--accent) 8%, transparent) 0px, transparent 55%),
+    radial-gradient(at 18% 92%, color-mix(in oklab, #6e3aff 8%, transparent) 0px, transparent 55%),
+    radial-gradient(at 50% 50%, color-mix(in oklab, var(--fg) 3%, transparent) 0px, transparent 70%);
+  background-attachment: fixed;
+}
+
+.dark body {
+  background-image:
+    radial-gradient(at 6% 4%, color-mix(in oklab, var(--accent) 22%, transparent) 0px, transparent 45%),
+    radial-gradient(at 94% 12%, color-mix(in oklab, #4a7dff 14%, transparent) 0px, transparent 50%),
+    radial-gradient(at 80% 64%, color-mix(in oklab, var(--accent) 12%, transparent) 0px, transparent 60%),
+    radial-gradient(at 16% 96%, color-mix(in oklab, #7d4fff 10%, transparent) 0px, transparent 55%),
+    radial-gradient(at 50% 50%, color-mix(in oklab, var(--fg) 5%, transparent) 0px, transparent 75%);
+}
+
+.aurora {
+  position: fixed;
+  inset: -10%;
+  z-index: -2;
+  pointer-events: none;
+  filter: blur(60px);
+  opacity: 0.75;
+  mix-blend-mode: normal;
+  background:
+    radial-gradient(38% 28% at 22% 22%, color-mix(in oklab, var(--accent) 38%, transparent), transparent 60%),
+    radial-gradient(34% 26% at 78% 30%, color-mix(in oklab, #5a8cff 30%, transparent), transparent 60%),
+    radial-gradient(40% 30% at 60% 78%, color-mix(in oklab, var(--accent) 25%, transparent), transparent 60%),
+    radial-gradient(28% 22% at 14% 86%, color-mix(in oklab, #7d4fff 28%, transparent), transparent 60%);
+  animation: auroraDrift 28s ease-in-out infinite alternate;
+}
+
+.dark .aurora { opacity: 0.55; }
+
+@keyframes auroraDrift {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(2%, -2%, 0) scale(1.05); }
+  100% { transform: translate3d(-2%, 2%, 0) scale(1); }
+}
+
+.vignette {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(120% 70% at 50% 0%, transparent 35%, color-mix(in oklab, var(--bg) 75%, transparent) 95%);
 }
 
 ::selection {

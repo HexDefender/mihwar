@@ -20,7 +20,7 @@ export default async function NewMemberPage() {
         {t.dashboard.actions.back}
       </Link>
       <div>
-        <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">{t.dashboard.actions.newMember}</h1>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">{t.dashboard.actions.newMember}</h1>
         <p className="text-fg-soft mt-2">أنشئ حساب عضو جديد. سيستخدم هذه البيانات لتسجيل الدخول.</p>
       </div>
       <div className="bezel">

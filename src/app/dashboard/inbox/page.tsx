@@ -28,7 +28,7 @@ export default async function InboxPage() {
           <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
           {inbox.length > 0 ? `${inbox.length} طلب جديد` : "صندوق الوارد"}
         </span>
-        <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">{t.dashboard.inboxTitle}</h1>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">{t.dashboard.inboxTitle}</h1>
       </div>
 
       {inbox.length === 0 ? (

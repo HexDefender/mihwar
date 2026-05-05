@@ -23,7 +23,7 @@ export default async function NewEquipmentPage() {
         {t.dashboard.actions.back}
       </Link>
       <div>
-        <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">{t.dashboard.actions.newEquipment}</h1>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">{t.dashboard.actions.newEquipment}</h1>
         <p className="text-fg-soft mt-2">سجّل قطعة جديدة بصورتها وبيانها وحدّد المسؤول الحالي عنها.</p>
       </div>
 

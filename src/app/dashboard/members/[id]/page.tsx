@@ -69,7 +69,7 @@ export default async function MemberDetailPage({ params }: { params: Promise<{ i
                   <Label htmlFor={`nameAr-${m.id}`}>{t.dashboard.fields.nameAr}</Label>
                   <Input id={`nameAr-${m.id}`} name="nameAr" defaultValue={m.nameAr ?? ""} />
                 </div>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <Label htmlFor={`position-${m.id}`}>{t.dashboard.fields.position}</Label>
                     <Input id={`position-${m.id}`} name="position" defaultValue={m.position ?? ""} />
@@ -87,7 +87,7 @@ export default async function MemberDetailPage({ params }: { params: Promise<{ i
                   <Label htmlFor={`avatar-${m.id}`}>{t.dashboard.fields.avatar}</Label>
                   <Input id={`avatar-${m.id}`} name="avatarUrl" defaultValue={m.avatarUrl ?? ""} dir="ltr" />
                 </div>
-                <div className="grid grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
                     <Label htmlFor={`role-${m.id}`}>{t.dashboard.fields.role}</Label>
                     <select
@@ -145,11 +145,11 @@ export default async function MemberDetailPage({ params }: { params: Promise<{ i
         <div className="lg:col-span-7">
           <h2 className="text-lg font-semibold tracking-tight mb-4">في عُهدته ({m.ownedEquipment.length})</h2>
           {m.ownedEquipment.length === 0 ? (
-            <div className="rounded-3xl border border-dashed border-line bg-bg-elev/40 p-10 text-center text-fg-mute text-sm">
+            <div className="rounded-3xl border border-dashed border-line bg-bg-elev/40 p-8 sm:p-10 text-center text-fg-mute text-sm">
               لا توجد قطع في عُهدة هذا العضو حالياً.
             </div>
           ) : (
-            <ul className="grid gap-3 sm:grid-cols-2">
+            <ul className="grid gap-3 grid-cols-1 sm:grid-cols-2">
               {m.ownedEquipment.map((eq) => {
                 const lbl = statusLabel(eq.status);
                 return (

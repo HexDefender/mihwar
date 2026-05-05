@@ -45,7 +45,7 @@ export default async function NewTransferPage() {
       </Link>
 
       <div>
-        <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">{t.dashboard.actions.newTransfer}</h1>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">{t.dashboard.actions.newTransfer}</h1>
         <p className="text-fg-soft mt-2">اختر القطعة التي تريد تحويلها {isAdmin ? "" : "من عُهدتك "}إلى زميل.</p>
       </div>
 

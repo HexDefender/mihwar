@@ -79,7 +79,7 @@ export default async function EquipmentDetailPage({
                 </div>
               </div>
               {eq.images.length > 1 && (
-                <div className="grid grid-cols-4 gap-2 p-2">
+                <div className="grid grid-cols-3 sm:grid-cols-4 gap-2 p-2">
                   {eq.images.slice(1).map((img) => (
                     <div key={img.id} className="relative aspect-square rounded-2xl overflow-hidden border border-line">
                       <Image src={img.url} alt={img.alt ?? eq.nameAr} fill sizes="120px" className="object-cover" />
@@ -93,9 +93,9 @@ export default async function EquipmentDetailPage({
 
         <div className="lg:col-span-5 space-y-6">
           <div>
-            <p className="text-[12px] uppercase tracking-[0.22em] text-fg-mute font-mono mb-2">{eq.serial}</p>
-            <h1 className="text-3xl md:text-4xl font-semibold tracking-tight leading-tight">{eq.nameAr}</h1>
-            <p className="text-fg-soft mt-2">{eq.name}{eq.brand ? ` · ${eq.brand}` : ""}{eq.model ? ` · ${eq.model}` : ""}</p>
+            <p className="text-[12px] uppercase tracking-[0.22em] text-fg-mute font-mono mb-2 break-all">{eq.serial}</p>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight leading-tight break-words">{eq.nameAr}</h1>
+            <p className="text-fg-soft mt-2 text-[14px] sm:text-base break-words">{eq.name}{eq.brand ? ` · ${eq.brand}` : ""}{eq.model ? ` · ${eq.model}` : ""}</p>
           </div>
 
           <div className="grid grid-cols-2 gap-3">

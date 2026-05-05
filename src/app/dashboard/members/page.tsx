@@ -26,7 +26,7 @@ export default async function MembersPage() {
     <div className="space-y-8 max-w-7xl mx-auto w-full">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">{t.dashboard.sections.members}</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">{t.dashboard.sections.members}</h1>
           <p className="text-fg-soft mt-2">إدارة أعضاء الفريق وصلاحياتهم.</p>
         </div>
         <Button asChild variant="accent">

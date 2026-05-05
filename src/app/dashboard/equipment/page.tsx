@@ -48,7 +48,7 @@ export default async function EquipmentListPage({ searchParams }: { searchParams
     <div className="space-y-8 max-w-7xl mx-auto w-full">
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
         <div>
-          <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">{t.dashboard.sections.equipment}</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">{t.dashboard.sections.equipment}</h1>
           <p className="text-fg-soft mt-2">سجلّ شامل لكلّ قطعة في الفريق، مع حالتها ومسؤولها الحالي.</p>
         </div>
         {isAdmin && (

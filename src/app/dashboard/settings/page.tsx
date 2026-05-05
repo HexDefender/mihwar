@@ -22,7 +22,7 @@ export default async function SettingsPage() {
   return (
     <div className="space-y-10 max-w-3xl mx-auto w-full">
       <div>
-        <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">{t.dashboard.sections.settings}</h1>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">{t.dashboard.sections.settings}</h1>
         <p className="text-fg-soft mt-2">حدّث بياناتك الشخصية وكلمة المرور.</p>
       </div>
 

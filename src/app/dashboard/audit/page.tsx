@@ -39,7 +39,7 @@ export default async function AuditPage() {
   return (
     <div className="space-y-8 max-w-4xl mx-auto w-full">
       <div>
-        <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">{t.dashboard.sections.audit}</h1>
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">{t.dashboard.sections.audit}</h1>
         <p className="text-fg-soft mt-2">آخر ١٠٠ حدث على المنصّة، مرتّبة من الأحدث.</p>
       </div>
 

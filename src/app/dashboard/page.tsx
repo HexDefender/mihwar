@@ -60,17 +60,17 @@ export default async function DashboardOverview() {
             <span className="h-1.5 w-1.5 rounded-full bg-accent" />
             {t.dashboard.overview}
           </span>
-          <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">{t.dashboard.overviewDesc}</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight">{t.dashboard.overviewDesc}</h1>
         </div>
         {isAdmin && (
-          <div className="flex gap-2">
-            <Button asChild variant="outline">
+          <div className="flex flex-wrap gap-2">
+            <Button asChild variant="outline" size="sm" className="md:[&]:h-11 md:[&]:px-5">
               <Link href="/dashboard/equipment/new">
                 <Plus size={16} weight="bold" />
                 {t.dashboard.actions.newEquipment}
               </Link>
             </Button>
-            <Button asChild variant="accent">
+            <Button asChild variant="accent" size="sm" className="md:[&]:h-11 md:[&]:px-5">
               <Link href="/dashboard/transfers/new">
                 <ArrowsLeftRight size={16} weight="bold" />
                 {t.dashboard.actions.newTransfer}
@@ -80,15 +80,15 @@ export default async function DashboardOverview() {
         )}
       </div>
 
-      <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <section className="grid gap-3 sm:gap-4 grid-cols-2 xl:grid-cols-4">
         <StatCard label={t.dashboard.stats.total} value={total} icon={Cube} tone="neutral" />
         <StatCard label={t.dashboard.stats.available} value={available} icon={CheckCircle} tone="success" />
         <StatCard label={t.dashboard.stats.inUse} value={inUse} icon={Cube} tone="accent" />
         <StatCard label={t.dashboard.stats.pendingTransfers} value={pending} icon={Hourglass} tone="warning" />
       </section>
 
-      <section className="grid gap-6 lg:grid-cols-3">
-        <div className="lg:col-span-2 rounded-3xl border border-line bg-bg-elev/60 backdrop-blur-md p-6">
+      <section className="grid gap-4 sm:gap-6 lg:grid-cols-3">
+        <div className="lg:col-span-2 rounded-3xl border border-line bg-bg-elev/60 backdrop-blur-md p-5 sm:p-6">
           <div className="flex items-center justify-between mb-5">
             <h2 className="text-lg font-semibold tracking-tight">آخر المعدّات المعدَّلة</h2>
             <Link href="/dashboard/equipment" className="text-[13px] text-fg-soft hover:text-fg flex items-center gap-1">
@@ -126,7 +126,7 @@ export default async function DashboardOverview() {
           )}
         </div>
 
-        <div className="rounded-3xl border border-line bg-bg-elev/60 backdrop-blur-md p-6">
+        <div className="rounded-3xl border border-line bg-bg-elev/60 backdrop-blur-md p-5 sm:p-6">
           <div className="flex items-center justify-between mb-5">
             <h2 className="text-lg font-semibold tracking-tight">آخر التحويلات</h2>
             <Link href="/dashboard/transfers" className="text-[13px] text-fg-soft hover:text-fg flex items-center gap-1">

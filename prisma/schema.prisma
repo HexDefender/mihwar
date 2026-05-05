@@ -1,0 +1,184 @@
+// Mihwar — equipment custody platform
+// Prisma schema (PostgreSQL)
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = []
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  MEMBER
+}
+
+enum EquipmentStatus {
+  AVAILABLE
+  IN_USE
+  IN_TRANSIT
+  MAINTENANCE
+  RETIRED
+}
+
+enum EquipmentCondition {
+  PRISTINE
+  EXCELLENT
+  GOOD
+  FAIR
+  WORN
+}
+
+enum TransferStatus {
+  PENDING
+  CONFIRMED
+  REJECTED
+  CANCELLED
+}
+
+enum AuditAction {
+  USER_CREATE
+  USER_UPDATE
+  USER_DELETE
+  EQUIPMENT_CREATE
+  EQUIPMENT_UPDATE
+  EQUIPMENT_DELETE
+  TRANSFER_INITIATE
+  TRANSFER_CONFIRM
+  TRANSFER_REJECT
+  TRANSFER_CANCEL
+  LOGIN
+  LOGOUT
+}
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  username      String   @unique
+  name          String
+  nameAr        String?
+  passwordHash  String
+  role          Role     @default(MEMBER)
+  phone         String?
+  avatarUrl     String?
+  position      String?
+  positionAr    String?
+  active        Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  ownedEquipment   Equipment[]      @relation("OwnerEquipment")
+  sentTransfers    Transfer[]       @relation("SenderTransfers")
+  receivedTransfers Transfer[]      @relation("ReceiverTransfers")
+  auditLogs        AuditLog[]
+  sessions         Session[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expires   DateTime
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model Category {
+  id         String      @id @default(cuid())
+  slug       String      @unique
+  name       String
+  nameAr     String
+  icon       String?
+  createdAt  DateTime    @default(now())
+  equipment  Equipment[]
+}
+
+model Equipment {
+  id            String              @id @default(cuid())
+  serial        String              @unique
+  name          String
+  nameAr        String
+  brand         String?
+  model         String?
+  description   String?             @db.Text
+  descriptionAr String?             @db.Text
+  status        EquipmentStatus     @default(AVAILABLE)
+  condition     EquipmentCondition  @default(EXCELLENT)
+  purchaseDate  DateTime?
+  purchasePrice Float?
+  notes         String?             @db.Text
+  ownerId       String?
+  categoryId    String?
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+
+  owner      User?              @relation("OwnerEquipment", fields: [ownerId], references: [id], onDelete: SetNull)
+  category   Category?          @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  images     EquipmentImage[]
+  transfers  Transfer[]
+
+  @@index([ownerId])
+  @@index([categoryId])
+  @@index([status])
+}
+
+model EquipmentImage {
+  id           String   @id @default(cuid())
+  equipmentId  String
+  url          String
+  alt          String?
+  isPrimary    Boolean  @default(false)
+  position     Int      @default(0)
+  createdAt    DateTime @default(now())
+
+  equipment    Equipment @relation(fields: [equipmentId], references: [id], onDelete: Cascade)
+
+  @@index([equipmentId])
+}
+
+model Transfer {
+  id            String         @id @default(cuid())
+  equipmentId   String
+  senderId      String
+  receiverId    String
+  status        TransferStatus @default(PENDING)
+  message       String?        @db.Text
+  expectedReturn DateTime?
+  initiatedAt   DateTime       @default(now())
+  confirmedAt   DateTime?
+  rejectedAt    DateTime?
+  cancelledAt   DateTime?
+  responseNote  String?        @db.Text
+
+  equipment  Equipment @relation(fields: [equipmentId], references: [id], onDelete: Cascade)
+  sender     User      @relation("SenderTransfers", fields: [senderId], references: [id], onDelete: Cascade)
+  receiver   User      @relation("ReceiverTransfers", fields: [receiverId], references: [id], onDelete: Cascade)
+
+  @@index([equipmentId])
+  @@index([senderId])
+  @@index([receiverId])
+  @@index([status])
+}
+
+model AuditLog {
+  id          String       @id @default(cuid())
+  userId      String?
+  action      AuditAction
+  entityType  String
+  entityId    String?
+  metadata    Json?
+  ipAddress   String?
+  userAgent   String?
+  createdAt   DateTime     @default(now())
+
+  user        User?        @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([entityType, entityId])
+  @@index([createdAt])
+}

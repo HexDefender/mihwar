@@ -1,6 +1,5 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Link from "next/link";
 import { motion } from "motion/react";
 import { ArrowUpRight } from "@phosphor-icons/react";
@@ -8,20 +7,11 @@ import { Button } from "@/components/ui/button";
 import { t } from "@/lib/i18n";
 import { arabicNumber } from "@/lib/utils";
 
-const HeroScene = dynamic(() => import("@/components/3d/HeroScene").then((m) => m.HeroScene), {
-  ssr: false,
-  loading: () => null,
-});
-
 export function Hero() {
   return (
     <section className="relative isolate min-h-[100dvh] overflow-hidden pt-32 pb-12 md:pt-36 md:pb-20">
       <div className="absolute inset-0 grid-floor opacity-[0.45] -z-10" aria-hidden="true" />
       <div className="absolute inset-0 -z-10 [background:radial-gradient(50%_60%_at_50%_0%,color-mix(in_oklab,var(--accent)_18%,transparent),transparent_75%)]" aria-hidden="true" />
-
-      <div className="absolute inset-0 -z-0 pointer-events-none">
-        <HeroScene />
-      </div>
 
       <div className="relative mx-auto max-w-7xl px-5 md:px-8">
         <div className="grid gap-12 lg:grid-cols-12 lg:items-center">

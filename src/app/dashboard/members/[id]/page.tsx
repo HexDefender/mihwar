@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { updateMember, deleteMember } from "@/actions/members";
+import { ConfirmForm } from "@/components/dashboard/confirm-form";
 import { statusLabel } from "@/lib/utils";
 import { t } from "@/lib/i18n";
 
@@ -125,19 +126,17 @@ export default async function MemberDetailPage({ params }: { params: Promise<{ i
               </form>
 
               {m.id !== session.user.id && (
-                <form
+                <ConfirmForm
                   action={deleteMember}
+                  message={`حذف ${m.nameAr || m.name}؟ لا يمكن التراجع.`}
                   className="mt-6 pt-6 border-t border-line-soft"
-                  onSubmit={(e) => {
-                    if (!confirm(`حذف ${m.nameAr || m.name}؟ لا يمكن التراجع.`)) e.preventDefault();
-                  }}
                 >
                   <input type="hidden" name="id" value={m.id} />
                   <Button type="submit" variant="danger" size="sm">
                     <Trash size={14} weight="bold" />
                     حذف العضو
                   </Button>
-                </form>
+                </ConfirmForm>
               )}
             </div>
           </div>

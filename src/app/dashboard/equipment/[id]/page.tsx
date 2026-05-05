@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { TransferDialog } from "@/components/dashboard/transfer-dialog";
+import { ConfirmForm } from "@/components/dashboard/confirm-form";
 import { deleteEquipment } from "@/actions/equipment";
 import { t } from "@/lib/i18n";
 import { formatRelativeTime, statusLabel } from "@/lib/utils";
@@ -154,18 +155,16 @@ export default async function EquipmentDetailPage({
                     {t.dashboard.actions.edit}
                   </Link>
                 </Button>
-                <form
+                <ConfirmForm
                   action={deleteEquipment}
-                  onSubmit={(e) => {
-                    if (!confirm(`حذف ${eq.nameAr}؟ لا يمكن التراجع.`)) e.preventDefault();
-                  }}
+                  message={`حذف ${eq.nameAr}؟ لا يمكن التراجع.`}
                 >
                   <input type="hidden" name="id" value={eq.id} />
                   <Button type="submit" variant="danger">
                     <Trash size={16} weight="bold" />
                     {t.dashboard.actions.delete}
                   </Button>
-                </form>
+                </ConfirmForm>
               </>
             )}
           </div>
